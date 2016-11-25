@@ -5,6 +5,8 @@
   <title>PROJECT</title>
 </head>
 <body>
-  Hola mundo
+  {% for poster in posters %}
+    {{ poster.text }}
+  {% endfor %}
 </body>
 </html>

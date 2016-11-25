@@ -4,5 +4,6 @@ from models import Poster
 
 
 def index(request):
-    posters = Poster.objects.all()
-    return render(request, 'index.html')
+    return render(request, 'index.html', {
+        'posters': Poster.objects.all()
+    })
