@@ -1,6 +1,6 @@
 /*
-hurt #4CAF50;
-deal #03A9F4;
+hurt | ouch  #4CAF50;
+deal | sorry #03A9F4;
 */
 
 .main {
@@ -142,6 +142,9 @@ i.material-icons.material-icons-text {
   width: 200px;
   text-align: center;
 }
+.btn.btn-comment.btn-full-width {
+  width: 100%;
+}
 
 .btn.btn-comment .badge {
   padding: 5px;
@@ -230,10 +233,10 @@ i.material-icons.material-icons-text {
   overflow: hidden;
 }
 
-.comment-actions.hurt .upvote-icon:hover, .comment-actions.hurt .comment-type {
+.comment-actions.ouch .upvote-icon:hover, .comment-actions.ouch .comment-type {
   color: #03A9F4;
 }
-.comment-actions.deal .upvote-icon:hover, .comment-actions.deal .comment-type {
+.comment-actions.sorry .upvote-icon:hover, .comment-actions.sorry .comment-type {
   color: #4CAF50;
 }
 
