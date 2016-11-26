@@ -34,6 +34,7 @@ def poster_view(request, slug, comment_id=None, page=None):
     comments = list(Comment.objects
         .filter(reaction__poster=poster)
         .exclude(id=comment_id)
+        .order_by('-votes')
         [start:end]
     )
 

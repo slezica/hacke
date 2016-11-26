@@ -34,4 +34,7 @@ Campaña el Ogro Machista
       debilidad cosa de mujeres)
 
 2. Solución:
-  - Visibilizar la violencia implícita
+  - Visibilizar la violencia implícita, desnaturalizarla
+  - Despertar empatía hacia los receptores, generar conciencia de la violencia
+
+3.
