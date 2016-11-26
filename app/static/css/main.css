@@ -3,21 +3,38 @@ hurt | ouch  #4CAF50;
 deal | sorry #03A9F4;
 */
 
+body {
+  background-color: #fef035;
+}
+
+
+a {
+  color: #0c663a;
+}
+
+a:hover {
+  color: #009688;
+  text-decoration: none;
+}
+
+
 .main {
   position: relative;
-  margin: 20px;
+  margin: 5px 0 20px;
 }
+
 
 /*
   HEADER
 */
 
 header {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  padding-right: 10px;
 }
 
 header .nav-link {
-  line-height: 90px;
+  line-height: 158px;
 }
 
 /*
@@ -233,12 +250,23 @@ i.material-icons.material-icons-text {
   overflow: hidden;
 }
 
+
 .comment-actions.ouch .upvote-icon:hover, .comment-actions.ouch .comment-type {
   color: #03A9F4;
 }
 .comment-actions.sorry .upvote-icon:hover, .comment-actions.sorry .comment-type {
   color: #4CAF50;
 }
+
+.comment-actions.ouch .voted .upvote-icon {
+  color: #03A9F4;
+  cursor: default;
+}
+.comment-actions.sorry .voted .upvote-icon {
+  color: #4CAF50;
+  cursor: default;
+}
+
 
 .comments.list-group .list-group-item .row-content,
 .comments.list-group .list-group-separator:before {
