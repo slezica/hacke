@@ -25,7 +25,7 @@ SECRET_KEY = '3%@po3_!#bybhv5wr8(03bfjl5dq!#yxr6%be-=-=uprddgjtu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'app.User'
 
