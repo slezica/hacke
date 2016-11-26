@@ -35,6 +35,13 @@ class Poster(Model):
     def react(self, user, type):
         return Reaction.objects.get_or_create(poster=self, author=user, type=type)
 
+    @transaction.atomic
+    def reaction_counts(self):
+        return {
+            'ouch' : self.reactions.filter(type=Reaction.Type.OUCH).count(),
+            'sorry': self.reactions.filter(type=Reaction.Type.SORRY).count()
+        }
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.text)
         return super(Poster, self).save(*args, **kwargs)
