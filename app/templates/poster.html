@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PROJECT</title>
+</head>
+<body>
+  <h1>{{ poster.text }}</h1>
+  <h2>{{ reactions.ouch }} - {{ reactions.sorry }}</h2>
+
+  {% for comment in comments %}
+    <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Single</a>
+    <p>{{ comment.author }}</p>
+    <p>{{ comment.text }}</p>
+    <p>{{ comment.votes }}</p>
+  {% endfor %}
+
+  <form id="" method="POST" action="{% url 'add_reaction' %}">
+    {% csrf_token %}
+    <input type="hidden" name="poster" value="{{ poster.id }}">
+    <input type="hidden" name="type" value="ouch">
+
+    <button type="submit">Ouch</button>
+  </form>
+
+  <form id="" method="POST" action="{% url 'add_reaction' %}">
+    {% csrf_token %}
+    <input type="hidden" name="poster" value="{{ poster.id }}">
+    <input type="hidden" name="type" value="sorry">
+
+    <button type="submit">Sorry</button>
+  </form>
+
+
+</body>
+</html>

@@ -1,9 +1,9 @@
 from django.http import HttpResponseBadRequest
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .models import Poster, Comment
-# from .forms import AddCommentForm
+from .models import Poster, Reaction, Comment
 from .utils import paginate
+from .forms import AddReactionForm, AttachCommentForm
 
 
 def index(request):
@@ -12,34 +12,47 @@ def index(request):
     })
 
 
-def comments_view(request, slug, comment_id=None, page='1'):
+def poster_view(request, slug, comment_id=None, page=None):
     poster = get_object_or_404(Poster, slug=slug)
 
+    # Fetch total reaction counts:
+    reactions = {
+        'ouch' : Reaction.objects.filter(poster=poster, type=Reaction.Type.OUCH).count(),
+        'sorry': Reaction.objects.filter(poster=poster, type=Reaction.Type.SORRY).count()
+    }
+
+    # Fetch page of comments:
     start, end = paginate(page)
 
-    # Fetch the comments in range:
-    comments = list(poster.comments.exclude(id=comment_id)[start:end])
+    comments = list(Comment.objects
+        .filter(reaction__poster=poster)
+        .exclude(id=comment_id)
+        [start:end]
+    )
 
     # If given a specific comment, place it first:
     if comment_id:
         comments.insert(0, get_object_or_404(Comment, id=comment_id))
 
-    return render(request, 'comments.html', {
-        'poster'  : poster,
-        'comments': comments
+    return render(request, 'poster.html', {
+        'poster'   : poster,
+        'reactions': reactions,
+        'comments' : comments
     })
 
 
-def comments_add(request, slug):
-    poster = get_object_or_404(Poster, slug=slug)
-
-    form = AddCommentForm(request.POST)
+def add_reaction(request):
+    form = AddReactionForm(request.POST)
 
     if form.is_valid():
-        props = form.validated_data
-        comment = Comment.objects.create(**props)
+        data = form.clean()
 
-        return redirect('comments_view', slug=poster.slug, comment_id=comment.id)
+        try:
+            data['poster'].react(request.user, data['type'])
+        except:
+            pass
 
-    else:
-        return HttpResponseBadRequest()
+        return redirect('poster_view', slug=data['poster'].slug)
+
+
+# def attach_comment

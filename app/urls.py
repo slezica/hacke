@@ -4,12 +4,14 @@ from .views import *
 
 
 urlpatterns = [
+    # Note: order is important. No time to write a better regex. Go, go, go!
     url(r'^$', index),
 
-    # Note: order is important. No time to write a better regex. Go, go, go!
-    url(r'p/(?P<slug>[^/]+)/c/(?P<comment_id>\d+)', comments_view, name='comments_view_single'),
-    url(r'p/(?P<slug>[^/]+)/c/add'                , comments_view, name='comments_add'),
-    url(r'p/(?P<slug>[^/]+)/(?P<page>\d+)'        , comments_view, name='comments_view_page'),
-    url(r'p/(?P<slug>[^/]+)'                      , comments_view, name='comments_view'),
+    url(r'action/add_reaction', add_reaction, name='add_reaction'),
+    # url(r'p/action/react', add_reaction, name='add_reaction'),
+
+    url(r'p/(?P<slug>[^/]+)/c/(?P<comment_id>\d+)', poster_view , name='poster_view_comment'),
+    url(r'p/(?P<slug>[^/]+)/(?P<page>\d+)'        , poster_view , name='poster_view_page'),
+    url(r'p/(?P<slug>[^/]+)'                      , poster_view , name='poster_view'),
 
 ]

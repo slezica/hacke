@@ -16,6 +16,8 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, *args, **options):
+        u1 = User.objects.create()
+
         p1 = Poster.objects.create(
             text = "Manejás como mujer"
         )
@@ -28,24 +30,21 @@ class Command(BaseCommand):
             text = "Las minas no saben nada de asado"
         )
 
+        for _ in range(3):
+            u = User.objects.create()
+            Reaction.objects.create(poster=p1, author=u, type=Reaction.Type.OUCH)
+
+        for _ in range(2):
+            u = User.objects.create()
+            Reaction.objects.create(poster=p1, author=u, type=Reaction.Type.SORRY)
+
         Comment.objects.create(
-            type   = Comment.Type.OUCH,
-            poster = p1,
-            author = "",
-            text   = ' '.join(LOREM_WORDS[:10])
+            reaction = p1.reactions.first(),
+            text     = ' '.join(LOREM_WORDS[:20])
         )
 
         Comment.objects.create(
-            type   = Comment.Type.OUCH,
-            poster = p1,
-            author = "Agustina",
-            text   = ' '.join(LOREM_WORDS[:20])
-        )
-
-        Comment.objects.create(
-            type   = Comment.Type.SORRY,
-            poster = p3,
-            author = "Carlos",
+            reaction = p1.reactions.last(),
             text   = ' '.join(LOREM_WORDS[:30])
         )
 
