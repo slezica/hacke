@@ -92,7 +92,7 @@
                 {% if comment.my_vote %}
                   <div class="icons voted pull-left">
                     <i class="material-icons vote-icon upvote-icon">&#xE8DC;</i>
-                    <small>{{ comment.votes.count }}</small>
+                    <small>{{ comment.vote_count }}</small>
                     &nbsp;
                     <small>
                       <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Link</a>
@@ -105,7 +105,7 @@
                       <input type="hidden" name="comment" value="{{ comment.id }}">
 
                       <i class="material-icons vote-icon upvote-icon">&#xE8DC;</i>
-                      <small class="js-votes-count">{{ comment.votes.count }}</small>
+                      <small class="js-votes-count">{{ comment.vote_count }}</small>
                       &nbsp;
                       <small>
                         <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Link</a>
