@@ -77,9 +77,8 @@ class Comment(Model):
     def vote(self, user):
         return Vote.objects.get_or_create(comment=self, author=user)
 
-    @property
-    def vote_count(self):
-        return Vote.objects.filter(comment=self).count()
+    def has_vote(self, user):
+        return Vote.objects.filter(comment=self, author=user).count() > 0
 
 
 class Vote(Model):
