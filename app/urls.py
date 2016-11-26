@@ -6,6 +6,7 @@ from .views import *
 urlpatterns = [
     # Note: order is important. No time to write a better regex. Go, go, go!
     url(r'^$', index),
+    url(r'feed', feed, name="feed"),
 
     url(r'action/add_reaction', add_reaction, name='add_reaction'),
     url(r'action/attach_comment', attach_comment, name='attach_comment'),

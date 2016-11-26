@@ -31,12 +31,19 @@
 
   jQuery('.btn-comment').on('click', function(e) {
     var $this = $(this)
+    var form = $this.closest('form')[0]
+    var type = $this.data('type')
 
     updateBadge(this, 0)
 
+    jQuery('.js-hidden-type').val(type)
+
     jQuery.ajax({
       method: 'POST',
-      url: '/add_reaction'
+      url: form.action,
+      data: new FormData(form),
+      processData: false,
+      contentType: false
     })
 
     $this
@@ -62,7 +69,8 @@
         .animate({ width: 0, paddingRight: 0, paddingLeft: 0 }, 400)
     }
 
-    $('#js-comment-form').slideDown()
+    jQuery('#js-comment-form')
+      .slideDown()
   })
   .on('mouseenter', function(e) {
     updateBadge(this, 1)

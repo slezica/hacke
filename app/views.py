@@ -18,6 +18,9 @@ def index(request):
 
     return render(request, 'index.html', { 'posters': posters })
 
+def feed(request):
+    return render(request, 'feed.html')
+
 
 def poster_view(request, slug, comment_id=None, page=None):
     poster = get_object_or_404(Poster, slug=slug)
