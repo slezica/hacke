@@ -42,7 +42,6 @@ def poster_view(request, slug, comment_id=None, page=None):
         [start:end]
     )
 
-    print comments
     # If given a specific comment, place it first:
     if comment_id:
         comments.insert(0, get_object_or_404(Comment, id=comment_id))
@@ -52,7 +51,7 @@ def poster_view(request, slug, comment_id=None, page=None):
         comment.my_vote = comment.get_vote(request.user)
 
     my_reaction = Reaction.objects.filter(poster=poster, author=request.user).first()
-    print comments
+
     return render(request, 'poster.html', {
         'poster'     : poster,
         'reactions'  : reactions,
