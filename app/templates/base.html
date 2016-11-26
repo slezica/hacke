@@ -32,14 +32,18 @@
         <div class="pull-left">
           <a href="/"><img src="{% static 'img/logo.png' %}" alt="OgroMachista logo"></a>
         </div>
-        {% block header_link %}
-          <a href="{% url 'feed' %}" class="pull-right nav-link">#OGROMACHISTA</a>
-        {% endblock %}
+        <span class="hidden-xs">
+          {% block header_link %}
+            <a href="{% url 'feed' %}" class="pull-right nav-link">#OGROMACHISTA</a>
+          {% endblock %}
+        </span>
       </header>
     </section>
 
     {% block content %}{% endblock %}
   </div>
+
+  {% block modal %}{% endblock %}
 
   <div id="js-mobile-check"></div>
   <div id="snackbar-container"></div>

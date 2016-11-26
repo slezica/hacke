@@ -17,7 +17,7 @@
 
   <section class="row">
     <div class="col-xs-12 col-md-5">
-      <div class="well well-lg image-well">
+      <div class="well well-lg image-well {% if my_reaction %}with-reaction{% endif %}">
         <div class="image-container">
           <div class="image text-center">
             <img class="img-responsive" src="http://placekitten.com/500/300" alt="Ogro machista" width="500" height="300" title="{{ poster.text }}" />
@@ -79,10 +79,21 @@
             <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a>
           </div>
         </div>
+
+        <div class="violence">
+          <b><a href="#" id="js-violence-modal">Esto también es violencia</a></b>
+          <p>
+            <a href="http://www.cnm.gov.ar/index.php">Consejo Nacional de las Mujeres</a>, <a href="http://www.inadi.gob.ar/">Inadi</a>, <a href="http://www.defensadelpublico.gob.ar/">Defensoria del Público</a>, <a href="http://www.cnm.gov.ar/linea144.php">Línea Telefónica 144 (contención y asesoramiento)</a>
+          </p>
+        </div>
       </div>
     </div>
     <div class="col-xs-12 col-md-7">
       <div class="list-group well comments">
+        {% if not comments %}
+          <p class="empty-comments">Aún no hay testimonios</p>
+        {% endif %}
+
         {% for comment in comments %}
           <div class="list-group-item">
             <div class="row-content">
@@ -126,4 +137,22 @@
       </div>
     </div>
   </section>
+{% endblock %}
+
+
+{% block modal %}
+  <div class="modal" id="violence-modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title">Violencia Simbólica</h3>
+        </div>
+        <div class="modal-body">
+          <p>La que a través de patrones estereotipados mensajes, valores, íconos o signos transmita y reproduzca dominación, desigualdad y discriminación en las relaciones sociales, naturalizando la subordinación de la mujer en la sociedad. <a href="http://www.cnm.gov.ar/legnacional.php">Ley 26.485</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop hidden"></div>
 {% endblock %}
