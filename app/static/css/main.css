@@ -1,6 +1,6 @@
 /*
-hurt | ouch  #4CAF50;
-deal | sorry #03A9F4;
+hurt | ouch  #810CE8;
+deal | sorry #0D7EFF;
 */
 
 body {
@@ -76,11 +76,11 @@ header .nav-link {
 }
 
 .hurt-counter {
-  background-color: #4CAF50;
+  background-color: #810CE8;
 }
 
 .deal-counter {
-  background-color: #03A9F4;
+  background-color: #0D7EFF;
 }
 
 @media screen and (min-width: 768px) {
@@ -123,28 +123,28 @@ i.material-icons.material-icons-text {
 }
 
 .btn.btn-hurt {
-  background-color: #4CAF50;
+  background-color: #810CE8;
   color: #FFF;
 }
 .btn.btn-hurt:not(.btn-link):hover {
-  background-color: #48a74c;
+  background-color: #6B0AC2;
 }
 .btn.btn-hurt.selected, .btn.btn-hurt.selected:hover {
-  background-color: #48a74c;
+  background-color: #6B0AC2;
 }
 .btn.btn-hurt.selected {
   cursor: default;
 }
 
 .btn.btn-deal {
-  background-color: #03A9F4;
+  background-color: #0D7EFF;
   color: #FFF;
 }
 .btn.btn-deal:not(.btn-link):hover {
-  background-color: #0393d4;
+  background-color: #0B6AD6;
 }
 .btn.btn-deal.selected, .btn.btn-deal.selected:hover {
-  background-color: #0393d4;
+  background-color: #0B6AD6;
 }
 .btn.btn-deal.selected {
   cursor: default;
@@ -170,6 +170,7 @@ i.material-icons.material-icons-text {
 .btn.btn-comment .badge {
   padding: 5px;
   margin-left: 5px;
+  width: 20px;
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.3);
 }
@@ -206,6 +207,11 @@ i.material-icons.material-icons-text {
   overflow: hidden;
 }
 
+.with-reaction .image-container {
+  min-height: 400px;
+}
+
+
 @media screen and (max-width: 768px) {
   .image-well {
     min-height: 447px;
@@ -213,6 +219,10 @@ i.material-icons.material-icons-text {
 
   .image-container {
     min-height: 410px;
+  }
+
+  .with-reaction .image-container {
+    min-height: 270px;
   }
 }
 
@@ -235,6 +245,18 @@ i.material-icons.material-icons-text {
   vertical-align: middle;
 }
 
+.violence {
+  margin-top: 20px;
+}
+.violence b {
+  display: block;
+  font-weight: 500;
+  font-size: 15px;
+}
+.violence p {
+  margin-top: 10px;
+}
+
 /*
   COMMENTS LIST
 */
@@ -254,20 +276,25 @@ i.material-icons.material-icons-text {
   overflow: hidden;
 }
 
+.empty-comments {
+  text-align: center;
+  color: #666;
+  font-weight: 500;
+}
 
 .comment-actions.ouch .upvote-icon:hover, .comment-actions.ouch .comment-type {
-  color: #03A9F4;
+  color: #0D7EFF;
 }
 .comment-actions.sorry .upvote-icon:hover, .comment-actions.sorry .comment-type {
-  color: #4CAF50;
+  color: #810CE8;
 }
 
 .comment-actions.ouch .voted .upvote-icon {
-  color: #03A9F4;
+  color: #0D7EFF;
   cursor: default;
 }
 .comment-actions.sorry .voted .upvote-icon {
-  color: #4CAF50;
+  color: #810CE8;
   cursor: default;
 }
 

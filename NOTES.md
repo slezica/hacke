@@ -23,7 +23,7 @@ Campaña el Ogro Machista
     - No seas histérica
 
   - Naturalización de estas piezas de violencia. A veces el victimario no
-    percibe que está siendo violento, sólo visita lugares comunes
+    percibe que está siendo violento, sólo hace eco de frases habituales
 
   - Expresiones que son la base de la pirámide de violencia, están por debajo
     del radar y permiten construir encima.
@@ -47,3 +47,4 @@ Campaña el Ogro Machista
   - Testimonios
     - "Me Dolió" y "Me Hago Cargo"
     - Se pueden compartir directamente y se votan
+

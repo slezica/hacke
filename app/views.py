@@ -1,5 +1,6 @@
 import json
 
+from django.db.models import Count, Avg
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -34,9 +35,10 @@ def poster_view(request, slug, comment_id=None, page=None):
     start, end = paginate(page)
 
     comments = list(Comment.objects
+        .annotate(vote_count=Count('votes'))
+        .order_by('-vote_count')
         .filter(reaction__poster=poster)
         .exclude(id=comment_id)
-        .order_by('-votes')
         [start:end]
     )
 

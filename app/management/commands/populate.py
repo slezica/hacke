@@ -19,33 +19,37 @@ class Command(BaseCommand):
         u1 = User.objects.create()
 
         p1 = Poster.objects.create(
-            text = "Manejás como mujer"
+            text = "Con mujeres no discuto"
         )
 
         p2 = Poster.objects.create(
-            text = "No seas histérica"
+            text = "Cuidá a tu hermana que es mujer"
         )
 
         p3 = Poster.objects.create(
-            text = "Las minas no saben nada de asado"
+            text = "No seas minita"
         )
 
-        for _ in range(3):
-            u = User.objects.create()
-            Reaction.objects.create(poster=p1, author=u, type=Reaction.Type.OUCH)
-
-        for _ in range(2):
-            u = User.objects.create()
-            Reaction.objects.create(poster=p1, author=u, type=Reaction.Type.SORRY)
-
-        Comment.objects.create(
-            reaction = p1.reactions.first(),
-            text     = ' '.join(LOREM_WORDS[:20])
+        p4 = Poster.objects.create(
+            text = "Podés dar la clase sola?"
         )
 
-        Comment.objects.create(
-            reaction = p1.reactions.last(),
-            text   = ' '.join(LOREM_WORDS[:30])
-        )
+        # for _ in range(3):
+        #     u = User.objects.create()
+        #     Reaction.objects.create(poster=p1, author=u, type=Reaction.Type.OUCH)
+
+        # for _ in range(2):
+        #     u = User.objects.create()
+        #     Reaction.objects.create(poster=p1, author=u, type=Reaction.Type.SORRY)
+
+        # Comment.objects.create(
+        #     reaction = p1.reactions.first(),
+        #     text     = ' '.join(LOREM_WORDS[:20])
+        # )
+
+        # Comment.objects.create(
+        #     reaction = p1.reactions.last(),
+        #     text   = ' '.join(LOREM_WORDS[:30])
+        # )
 
 

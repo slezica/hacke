@@ -3,24 +3,24 @@
 {% block title %}OgroMachista{% endblock %}
 
 {% block facebook_meta %}
+  {% load staticfiles %}
+
   <meta property="og:url"         content="http://ogromachista.com" />
   <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="OgroMachista - {{ poster.text }}" />
-  <meta property="og:description" content="{{ poster.text }}" />
-  <meta property="og:image"       content="LOGOOOOOOOOOOOO" />
+  <meta property="og:title"       content="OgroMachista" />
+  <meta property="og:description" content="#OgroMachista" />
+  <meta property="og:image"       content="http://ogromachista.com{% static 'img/logo.png' %}" />
 {% endblock %}
 
 {% block content %}
-  {% include 'partials/share_buttons.html' %}
-
   <div class="row phrases">
     {% for poster in posters %}
       <div class="col-xs-12 col-sm-6 col-md-4">
         <a href="{% url 'poster_view' slug=poster.slug %}" class="well phrase-card">
           <span>{{ poster.text }}</span>
           <div class="counters">
-            <span class="hurt-counter" title="ME DOLIO">11</span>
-            <span class="deal-counter" title="ME HAGO CARGO">10</span>
+            <span class="hurt-counter" title="ME DOLIO">{{ poster.reactions.ouch }}</span>
+            <span class="deal-counter" title="ME HAGO CARGO">{{ poster.reactions.sorry }}</span>
           </div>
         </a>
       </div>
