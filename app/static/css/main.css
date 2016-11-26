@@ -162,6 +162,7 @@ i.material-icons.material-icons-text {
 .btn.btn-comment {
   width: 200px;
   text-align: center;
+  font-size: 13px;
 }
 .btn.btn-comment.btn-full-width {
   width: 100%;
