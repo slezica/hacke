@@ -1,12 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PROJECT</title>
-</head>
-<body>
-  {% for poster in posters %}
-    <p><a href="{% url 'poster_view' slug=poster.slug %}"> - {{ poster.text }}</a></p>
-  {% endfor %}
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}OgroMachista{% endblock %}
+
+{% block content %}
+  <div class="row phrases">
+    {% for poster in posters %}
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <a href="{% url 'poster_view' slug=poster.slug %}" class="well phrase-card">
+          <span>{{ poster.text }}</span>
+          <div class="counters">
+            <span class="hurt-counter" title="ME DOLIO">11</span>
+            <span class="deal-counter" title="ME HAGO CARGO">10</span>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      SHARE
+    </div>
+  </div>
+{% endblock %}
