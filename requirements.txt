@@ -2,7 +2,6 @@ altgraph==0.10.2
 bdist-mpkg==0.5.0
 beautifulsoup4==4.3.2
 binaryornot==0.4.0
-bonjour-py==0.3
 chardet==2.2.1
 complexity==0.9.1
 cssselect==0.9.1
