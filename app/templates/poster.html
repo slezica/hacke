@@ -18,7 +18,13 @@
     <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Single</a>
     <p>{{ comment.author }}</p>
     <p>{{ comment.text }}</p>
-    <p>{{ comment.votes }}</p>
+    <p>{{ comment.vote_count }}</p>
+
+    <form method="POST" action="{% url 'vote_comment' %}">
+      {% csrf_token %}
+      <input type="hidden" name="comment" value="{{ comment.id }}">
+      <input type="submit" value="Vote">
+    </form>
   {% endfor %}
 
   <form id="" method="POST" action="{% url 'add_reaction' %}">

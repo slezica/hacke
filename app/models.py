@@ -73,5 +73,16 @@ class Reaction(Model):
 class Comment(Model):
     reaction = OneToOneField(Reaction, related_name='comment')
     text     = TextField()
-    votes    = IntegerField(default=0)
+
+    def vote(self, user):
+        return Vote.objects.get_or_create(comment=self, author=user)
+
+    @property
+    def vote_count(self):
+        return Vote.objects.filter(comment=self).count()
+
+
+class Vote(Model):
+    comment = ForeignKey(Comment, related_name='votes')
+    author  = ForeignKey(User)
 

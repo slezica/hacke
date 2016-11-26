@@ -9,6 +9,7 @@ urlpatterns = [
 
     url(r'action/add_reaction', add_reaction, name='add_reaction'),
     url(r'action/attach_comment', attach_comment, name='attach_comment'),
+    url(r'action/vote_comment', vote_comment, name='vote_comment'),
 
     url(r'p/(?P<slug>[^/]+)/c/(?P<comment_id>\d+)', poster_view , name='poster_view_comment'),
     url(r'p/(?P<slug>[^/]+)/(?P<page>\d+)'        , poster_view , name='poster_view_page'),

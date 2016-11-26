@@ -13,3 +13,6 @@ class AttachCommentForm(Form):
     reaction = ModelChoiceField(queryset=Reaction.objects.all())
     text     = CharField(max_length=128, required=False)
 
+
+class VoteCommentForm(Form):
+    comment = ModelChoiceField(queryset=Comment.objects.all())

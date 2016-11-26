@@ -1,9 +1,9 @@
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Poster, Reaction, Comment
 from .utils import paginate
-from .forms import AddReactionForm, AttachCommentForm
+from .forms import AddReactionForm, AttachCommentForm, VoteCommentForm
 
 
 def index(request):
@@ -53,16 +53,13 @@ def add_reaction(request):
 
     if form.is_valid():
         data = form.clean()
+        data['poster'].react(request.user, data['type'])
 
-        try:
-            data['poster'].react(request.user, data['type'])
-        except:
-            pass
-
-        return redirect('poster_view', slug=data['poster'].slug)
+        return HttpResponse()
 
     else:
         print form.errors
+        return HttpResponseBadRequest()
 
 def attach_comment(request):
     form = AttachCommentForm(request.POST)
@@ -81,3 +78,17 @@ def attach_comment(request):
 
     else:
         print form.errors
+
+
+def vote_comment(request):
+    form = VoteCommentForm(request.POST)
+
+    if form.is_valid():
+        data = form.clean()
+        data['comment'].vote(request.user)
+
+        return HttpResponse()
+
+    else:
+        print form.errors
+        return HttpResponseBadRequest()
