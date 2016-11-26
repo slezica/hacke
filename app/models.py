@@ -33,7 +33,7 @@ class Poster(Model):
 
     @transaction.atomic
     def react(self, user, type):
-        return Reaction.objects.get_or_create(poster=self, author=user, type=type)
+        return Reaction.objects.get_or_create(poster=self, author=user, type=type)[0]
 
     @transaction.atomic
     def reaction_counts(self):
@@ -62,7 +62,7 @@ class Reaction(Model):
 
     @transaction.atomic
     def set_comment(self, text):
-        return Comment.objects.get_or_create(reaction=self, text=text)
+        return Comment.objects.get_or_create(reaction=self, text=text)[0]
 
 
     poster = ForeignKey(Poster, related_name='reactions')
@@ -75,7 +75,7 @@ class Comment(Model):
     text     = TextField()
 
     def vote(self, user):
-        return Vote.objects.get_or_create(comment=self, author=user)
+        return Vote.objects.get_or_create(comment=self, author=user)[0]
 
     def get_vote(self, user):
         return Vote.objects.filter(comment=self, author=user).first()

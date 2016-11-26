@@ -22,8 +22,8 @@ Campaña el Ogro Machista
     - Manejás como mujer
     - No seas histérica
 
-  - Naturalización de estas piezas de violencia, tanto que hace falta esfuerzo
-    de reflexión para sentir la violencia.
+  - Naturalización de estas piezas de violencia. A veces el victimario no
+    percibe que está siendo violento, sólo visita lugares comunes
 
   - Expresiones que son la base de la pirámide de violencia, están por debajo
     del radar y permiten construir encima.
@@ -37,4 +37,13 @@ Campaña el Ogro Machista
   - Visibilizar la violencia implícita, desnaturalizarla
   - Despertar empatía hacia los receptores, generar conciencia de la violencia
 
-3.
+3. Estrategia:
+  - Personaje: el Ogro Machista. Le gusta tirar frases con violencia implícita
+
+  - Share:
+    - Stickers y estampado de imágenes y fotos
+    - Hashtag #ogroMachista, se agregan los tweets más retweeteados en la página
+
+  - Testimonios
+    - "Me Dolió" y "Me Hago Cargo"
+    - Se pueden compartir directamente y se votan
