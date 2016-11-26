@@ -36,6 +36,8 @@
     var form = $(this).closest('form')[0]
     var formData = new FormData(form)
 
+    if (! form) return
+
     jQuery.ajax({
       method: 'POST',
       url: form.action,
