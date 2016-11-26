@@ -41,7 +41,3 @@ spark-parser==1.4.0
 sqlparse==0.1.18
 tweepy==3.5.0
 unicodecsv==0.9.4
-vboxapi==1.0
-xattr==0.6.4
-xdis==3.2.3
-zope.interface==4.1.1
