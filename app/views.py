@@ -42,6 +42,10 @@ def poster_view(request, slug, comment_id=None, page=None):
     if comment_id:
         comments.insert(0, get_object_or_404(Comment, id=comment_id))
 
+    # Attach the user's vote if any:
+    for comment in comments:
+        comment.my_vote = comment.get_vote(request.user)
+
     my_reaction = Reaction.objects.filter(poster=poster, author=request.user).first()
 
     return render(request, 'poster.html', {
