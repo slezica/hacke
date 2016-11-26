@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+from slugify import slugify
 
 from django.db.models import *
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -22,7 +22,12 @@ class User(AbstractBaseUser):
 
 
 class Poster(Model):
+    slug = CharField(max_length=256, unique=True)
     text = CharField(max_length=256)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.text)
+        return super(Poster, self).save(*args, **kwargs)
 
 
 class Comment(Model):
@@ -35,7 +40,7 @@ class Comment(Model):
         (Type.SORRY, "Me hago cargo"),
     ]
 
-    poster = ForeignKey(Poster)
+    poster = ForeignKey(Poster, related_name='comments')
     type   = CharField(max_length=10, choices=TYPE_CHOICES)
     author = CharField(max_length=128, default='')
     text   = TextField()

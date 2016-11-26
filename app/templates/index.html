@@ -6,7 +6,7 @@
 </head>
 <body>
   {% for poster in posters %}
-    <p>{{ poster.text }}</p>
+    <p><a href="{% url 'comments_view' slug=poster.slug %}"> - {{ poster.text }}</a></p>
   {% endfor %}
 </body>
 </html>

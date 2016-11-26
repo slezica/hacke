@@ -32,21 +32,21 @@ class Command(BaseCommand):
             type   = Comment.Type.OUCH,
             poster = p1,
             author = "",
-            text   = LOREM_WORDS[:10]
+            text   = ' '.join(LOREM_WORDS[:10])
         )
 
         Comment.objects.create(
             type   = Comment.Type.OUCH,
             poster = p1,
             author = "Agustina",
-            text   = LOREM_WORDS[:20]
+            text   = ' '.join(LOREM_WORDS[:20])
         )
 
         Comment.objects.create(
             type   = Comment.Type.SORRY,
             poster = p3,
             author = "Carlos",
-            text   = LOREM_WORDS[:30]
+            text   = ' '.join(LOREM_WORDS[:30])
         )
 
 
