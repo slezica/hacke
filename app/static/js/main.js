@@ -32,8 +32,6 @@
       contentType: false
     })
 
-    debugger
-
     icons
       .addClass('voted')
       .find('.js-votes-count')
