@@ -72,7 +72,7 @@ class Reaction(Model):
 
 class Comment(Model):
     reaction = OneToOneField(Reaction, related_name='comment')
-    text     = TextField()
+    text     = TextField(max_length=3000)
 
     def vote(self, user):
         return Vote.objects.get_or_create(comment=self, author=user)[0]
