@@ -20,7 +20,6 @@ macholib==1.5.1
 MarkupSafe==0.23
 mechanize==0.2.5
 modulegraph==0.10.4
-numpy==1.8.0rc1
 oauth==1.0.1
 oauthlib==1.0.3
 pika==0.10.0
