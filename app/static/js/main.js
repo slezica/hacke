@@ -32,6 +32,8 @@
       contentType: false
     })
 
+    debugger
+
     icons
       .addClass('voted')
       .find('.js-votes-count')
@@ -54,7 +56,11 @@
       url: form.action,
       data: new FormData(form),
       processData: false,
-      contentType: false
+      contentType: false,
+      success: function(response) {
+        debugger
+        jQuery('.js-hidden-reaction').val(response)
+      }
     })
 
     $this

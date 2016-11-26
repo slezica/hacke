@@ -25,7 +25,7 @@
 
           {% if my_reaction %}
             <div class="comment-buttons">
-              {% if comment.reaction.type == 'ouch' %}
+              {% if my_reaction.type == 'ouch' %}
                 <div class="btn btn-raised btn-hurt btn-comment btn-full-width selected" data-type="ouch">
                   ME DOLIO
                   <span class="badge">{{ reactions.ouch }}</span>
@@ -59,8 +59,7 @@
 
           <form id="js-comment-form" class="form-horizontal comment-form" action="{% url 'attach_comment' %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="poster" value="{{ poster.id }}">
-            <input type="hidden" name="reaction" value="{{ my_reaction.id }}">
+            <input type="hidden" class="js-hidden-reaction" name="reaction" value="">
             <input type="hidden" class="js-hidden-type" name="type" value="">
 
             <fieldset>
@@ -93,7 +92,7 @@
                 {% if comment.my_vote %}
                   <div class="icons voted pull-left">
                     <i class="material-icons vote-icon upvote-icon">&#xE8DC;</i>
-                    <small class="js-votes-count">{{ comment.votes.count }}</small>
+                    <small>{{ comment.votes.count }}</small>
                     &nbsp;
                     <small>
                       <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Link</a>
@@ -106,7 +105,7 @@
                       <input type="hidden" name="comment" value="{{ comment.id }}">
 
                       <i class="material-icons vote-icon upvote-icon">&#xE8DC;</i>
-                      <small>{{ comment.votes.count }}</small>
+                      <small class="js-votes-count">{{ comment.votes.count }}</small>
                       &nbsp;
                       <small>
                         <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Link</a>

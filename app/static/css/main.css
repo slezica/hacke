@@ -131,6 +131,8 @@ i.material-icons.material-icons-text {
 }
 .btn.btn-hurt.selected, .btn.btn-hurt.selected:hover {
   background-color: #48a74c;
+}
+.btn.btn-hurt.selected {
   cursor: default;
 }
 
@@ -143,6 +145,8 @@ i.material-icons.material-icons-text {
 }
 .btn.btn-deal.selected, .btn.btn-deal.selected:hover {
   background-color: #0393d4;
+}
+.btn.btn-deal.selected {
   cursor: default;
 }
 
