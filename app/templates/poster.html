@@ -81,10 +81,10 @@
           </form>
         </div>
 
-        <div class="violence text-center">
-          <b><a href="#" id="js-violence-modal" style="font-weight: bold; text-decoration: underline">¿Por qué esto es violencia?</a></b>
-          <p>
-            <a href="http://www.cnm.gov.ar/index.php">Consejo Nacional de las Mujeres</a>, <a href="http://www.inadi.gob.ar/">Inadi</a>, <a href="http://www.defensadelpublico.gob.ar/">Defensoria del Público</a>, <a href="http://www.cnm.gov.ar/linea144.php">Línea Telefónica 144 (contención y asesoramiento)</a>
+        <div class="violence">
+          <p class="text-justify"><b>Violencia Simbólica</b>La que a través de patrones estereotipados mensajes, valores, íconos o signos transmita y reproduzca dominación, desigualdad y discriminación en las relaciones sociales, naturalizando la subordinación de la mujer en la sociedad. <a href="http://www.cnm.gov.ar/legnacional.php">Ley 26.485</a></p>
+          <p class="text-left">
+            <a href="http://www.cnm.gov.ar/index.php">Consejo Nacional de las Mujeres</a> • <a href="http://www.inadi.gob.ar/">Inadi</a> • <a href="http://www.defensadelpublico.gob.ar/">Defensoria del Público</a> • <a href="http://www.cnm.gov.ar/linea144.php">Línea Telefónica 144 (contención y asesoramiento)</a>
           </p>
         </div>
       </div>
@@ -138,22 +138,4 @@
       </div>
     </div>
   </section>
-{% endblock %}
-
-
-{% block modal %}
-  <div class="modal" id="violence-modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title">Violencia Simbólica</h3>
-        </div>
-        <div class="modal-body">
-          <p>La que a través de patrones estereotipados mensajes, valores, íconos o signos transmita y reproduzca dominación, desigualdad y discriminación en las relaciones sociales, naturalizando la subordinación de la mujer en la sociedad. <a href="http://www.cnm.gov.ar/legnacional.php">Ley 26.485</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-backdrop hidden"></div>
 {% endblock %}

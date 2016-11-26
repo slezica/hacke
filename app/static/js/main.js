@@ -10,18 +10,6 @@
     })
   }
 
-  jQuery('#js-violence-modal').on('click', function() {
-    $(document.body).addClass('modal-open')
-    $("#violence-modal").show().addClass('fade in')
-    $(".modal-backdrop").removeClass('hidden')
-    return false
-  })
-  jQuery('.modal button.close').on('click', function() {
-    $(document.body).removeClass('modal-open')
-    $("#violence-modal").removeClass('fade in').hide()
-    $(".modal-backdrop").addClass('hidden')
-  })
-
   jQuery('.upvote-icon').on('click', function() {
     var icons = $(this).closest('.icons')
 
