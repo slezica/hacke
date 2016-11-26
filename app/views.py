@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -61,9 +63,9 @@ def add_reaction(request):
 
     if form.is_valid():
         data = form.clean()
-        data['poster'].react(request.user, data['type'])
+        reaction = data['poster'].react(request.user, data['type'])
 
-        return HttpResponse()
+        return HttpResponse(json.dumps(reaction.id))
 
     else:
         print form.errors

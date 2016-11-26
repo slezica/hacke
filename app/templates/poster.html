@@ -15,22 +15,6 @@
 {% block content %}
   {% include 'partials/share_buttons.html' %}
 
-
-<!-- EMPIEZA LA GRASA -->
-{% for comment in comments %}
-    <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Single</a>
-    <p>{{ comment.author }}</p>
-    <p>{{ comment.text }}</p>
-    <p>{{ comment.vote_count }}</p>
-
-    <form method="POST" action="{% url 'vote_comment' %}">
-      {% csrf_token %}
-      <input type="hidden" name="comment" value="{{ comment.id }}">
-      <input type="submit" value="Vote">
-    </form>
-  {% endfor %}
-<!-- TERMINA LA GRASA -->
-
   <section class="row">
     <div class="col-xs-12 col-md-5">
       <div class="well well-lg image-well">
@@ -41,13 +25,13 @@
 
           {% if my_reaction %}
             <div class="comment-buttons">
-              {% if comment.reaction.type == 'ouch' %}
-                <div class="btn btn-raised btn-hurt btn-comment btn-full-width" data-type="ouch">
+              {% if my_reaction.type == 'ouch' %}
+                <div class="btn btn-raised btn-hurt btn-comment btn-full-width selected" data-type="ouch">
                   ME DOLIO
                   <span class="badge">{{ reactions.ouch }}</span>
                 </div>
               {% else %}
-                <div class="btn btn-raised btn-deal btn-comment btn-full-width" data-type="sorry">
+                <div class="btn btn-raised btn-deal btn-comment btn-full-width selected" data-type="sorry">
                   ME HAGO CARGO
                   <span class="badge">{{ reactions.sorry }}</span>
                 </div>
@@ -75,13 +59,13 @@
 
           <form id="js-comment-form" class="form-horizontal comment-form" action="{% url 'attach_comment' %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="poster" value="{{ poster.id }}">
+            <input type="hidden" class="js-hidden-reaction" name="reaction" value="">
             <input type="hidden" class="js-hidden-type" name="type" value="">
 
             <fieldset>
               <div class="form-group">
                 <div class="col-xs-12">
-                  <textarea class="form-control" rows="3"></textarea>
+                  <textarea class="form-control" name="text" rows="3"></textarea>
                   <input type="submit" class="btn btn-raised btn-black btn-comment btn-block" />
                 </div>
               </div>
@@ -105,16 +89,30 @@
               <p class="list-group-item-text">{{ comment.text }}</p>
 
               <div class="comment-actions {{ comment.reaction.type }}">
-                <div class="icons pull-left">
-                  <form action="/upvote">
+                {% if comment.my_vote %}
+                  <div class="icons voted pull-left">
                     <i class="material-icons vote-icon upvote-icon">&#xE8DC;</i>
-                    <small>{{ comment.votes }}</small>
+                    <small>{{ comment.votes.count }}</small>
                     &nbsp;
                     <small>
                       <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Link</a>
                     </small>
-                  </form>
-                </div>
+                  </div>
+                {% else %}
+                  <div class="icons pull-left">
+                    <form method="POST" action="{% url 'vote_comment' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="comment" value="{{ comment.id }}">
+
+                      <i class="material-icons vote-icon upvote-icon">&#xE8DC;</i>
+                      <small class="js-votes-count">{{ comment.votes.count }}</small>
+                      &nbsp;
+                      <small>
+                        <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Link</a>
+                      </small>
+                    </form>
+                  </div>
+                {% endif %}
 
                 <div class="pull-right">
                   <span class="comment-type">ME HAGO CARGO</span>

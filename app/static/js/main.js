@@ -11,8 +11,12 @@
   }
 
   jQuery('.upvote-icon').on('click', function() {
+    var icons = $(this).closest('.icons')
+
+    if (icons.hasClass('voted')) return
+
     $.snackbar({
-      content: 'UPVOTE!',
+      content: 'Comentario votado!',
       style: 'toast',
       timeout: 1000
     })
@@ -27,6 +31,15 @@
       processData: false,
       contentType: false
     })
+
+    debugger
+
+    icons
+      .addClass('voted')
+      .find('.js-votes-count')
+      .text(function(index, old) {
+        return parseInt(old) + 1
+      })
   })
 
   jQuery('.btn-comment').on('click', function(e) {
@@ -43,12 +56,16 @@
       url: form.action,
       data: new FormData(form),
       processData: false,
-      contentType: false
+      contentType: false,
+      success: function(response) {
+        debugger
+        jQuery('.js-hidden-reaction').val(response)
+      }
     })
 
     $this
       .data('commented', true)
-      .off('click')
+      .off()
       .addClass('selected')
 
     if (jQuery("#js-mobile-check").css('display') === 'none') {
@@ -72,10 +89,10 @@
     jQuery('#js-comment-form')
       .slideDown()
   })
-  .on('mouseenter', function(e) {
+  .on('mouseenter', ':not(.selected)', function(e) {
     updateBadge(this, 1)
   })
-  .on('mouseleave', function(e) {
+  .on('mouseleave', ':not(.selected)', function(e) {
     updateBadge(this, -1)
   })
 
