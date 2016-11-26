@@ -33,7 +33,14 @@ class Poster(Model):
 
     @transaction.atomic
     def react(self, user, type):
-        return Reaction.objects.get_or_create(poster=self, author=user, type=type)
+        return Reaction.objects.get_or_create(poster=self, author=user, type=type)[0]
+
+    @transaction.atomic
+    def reaction_counts(self):
+        return {
+            'ouch' : self.reactions.filter(type=Reaction.Type.OUCH).count(),
+            'sorry': self.reactions.filter(type=Reaction.Type.SORRY).count()
+        }
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.text)
@@ -53,6 +60,11 @@ class Reaction(Model):
     class Meta:
         unique_together = [('poster', 'author')]
 
+    @transaction.atomic
+    def set_comment(self, text):
+        return Comment.objects.get_or_create(reaction=self, text=text)[0]
+
+
     poster = ForeignKey(Poster, related_name='reactions')
     author = ForeignKey(User, related_name='reactions')
     type   = CharField(max_length=10, choices=Type.CHOICES)
@@ -61,4 +73,15 @@ class Reaction(Model):
 class Comment(Model):
     reaction = OneToOneField(Reaction, related_name='comment')
     text     = TextField()
-    votes    = IntegerField(default=0)
+
+    def vote(self, user):
+        return Vote.objects.get_or_create(comment=self, author=user)[0]
+
+    def get_vote(self, user):
+        return Vote.objects.filter(comment=self, author=user).first()
+
+
+class Vote(Model):
+    comment = ForeignKey(Comment, related_name='votes')
+    author  = ForeignKey(User)
+

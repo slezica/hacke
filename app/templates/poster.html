@@ -1,36 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>PROJECT</title>
-</head>
-<body>
-  <h1>{{ poster.text }}</h1>
-  <h2>{{ reactions.ouch }} - {{ reactions.sorry }}</h2>
+{% extends "base.html" %}
 
-  {% for comment in comments %}
+{% block title %}OgroMachista - {{ poster.text }}{% endblock %}
+
+{% block facebook_meta %}
+  <meta property="og:url"         content="http://ogromachista.com{{ request.path }}" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="OgroMachista - {{ poster.text }}" />
+  <meta property="og:description" content="{{ poster.text }}" />
+  <meta property="og:image"       content="IMAGEEEEEEEEE" />
+{% endblock %}
+
+{% block main_class %}detail{% endblock %}
+
+{% block content %}
+  {% include 'partials/share_buttons.html' %}
+
+
+<!-- EMPIEZA LA GRASA -->
+{% for comment in comments %}
     <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Single</a>
     <p>{{ comment.author }}</p>
     <p>{{ comment.text }}</p>
-    <p>{{ comment.votes }}</p>
+    <p>{{ comment.vote_count }}</p>
+
+    <form method="POST" action="{% url 'vote_comment' %}">
+      {% csrf_token %}
+      <input type="hidden" name="comment" value="{{ comment.id }}">
+      <input type="submit" value="Vote">
+    </form>
   {% endfor %}
+<!-- TERMINA LA GRASA -->
 
-  <form id="" method="POST" action="{% url 'add_reaction' %}">
-    {% csrf_token %}
-    <input type="hidden" name="poster" value="{{ poster.id }}">
-    <input type="hidden" name="type" value="ouch">
+  <section class="row">
+    <div class="col-xs-12 col-md-5">
+      <div class="well well-lg image-well">
+        <div class="image-container">
+          <div class="image text-center">
+            <img class="img-responsive" src="http://placekitten.com/500/300" alt="Ogro machista" width="500" height="300" title="{{ poster.text }}" />
+          </div>
 
-    <button type="submit">Ouch</button>
-  </form>
+          {% if my_reaction %}
+            <div class="comment-buttons">
+              {% if comment.reaction.type == 'ouch' %}
+                <div class="btn btn-raised btn-hurt btn-comment btn-full-width" data-type="ouch">
+                  ME DOLIO
+                  <span class="badge">{{ reactions.ouch }}</span>
+                </div>
+              {% else %}
+                <div class="btn btn-raised btn-deal btn-comment btn-full-width" data-type="sorry">
+                  ME HAGO CARGO
+                  <span class="badge">{{ reactions.sorry }}</span>
+                </div>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="comment-buttons">
+              <form action="{% url 'add_reaction' %}" method="POST">
+                {% csrf_token %}
 
-  <form id="" method="POST" action="{% url 'add_reaction' %}">
-    {% csrf_token %}
-    <input type="hidden" name="poster" value="{{ poster.id }}">
-    <input type="hidden" name="type" value="sorry">
+                <input type="hidden" name="poster" value="{{ poster.id }}">
+                <input type="hidden" class="js-hidden-type" name="type" value="">
 
-    <button type="submit">Sorry</button>
-  </form>
+                <div class="btn btn-raised btn-hurt btn-comment" data-type="ouch">
+                  ME DOLIO
+                  <span class="badge">{{ reactions.ouch }}</span>
+                </div>
+                <div class="btn btn-raised btn-deal btn-comment pull-sm-right" data-type="sorry">
+                  ME HAGO CARGO
+                  <span class="badge">{{ reactions.sorry }}</span>
+                </div>
+              </form>
+            </div>
+          {% endif %}
 
+          <form id="js-comment-form" class="form-horizontal comment-form" action="{% url 'attach_comment' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="poster" value="{{ poster.id }}">
+            <input type="hidden" class="js-hidden-type" name="type" value="">
 
-</body>
-</html>
+            <fieldset>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <textarea class="form-control" rows="3"></textarea>
+                  <input type="submit" class="btn btn-raised btn-black btn-comment btn-block" />
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="share">
+          <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{ poster.text }}" data-size="small">Tweet</a>
+          <div class="pull-right fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-mobile-iframe="true">
+            <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-7">
+      <div class="list-group well comments">
+        {% for comment in comments %}
+          <div class="list-group-item">
+            <div class="row-content">
+              <p class="list-group-item-text">{{ comment.text }}</p>
+
+              <div class="comment-actions {{ comment.reaction.type }}">
+                <div class="icons pull-left">
+                  <form action="/upvote">
+                    <i class="material-icons vote-icon upvote-icon">&#xE8DC;</i>
+                    <small>{{ comment.votes }}</small>
+                    &nbsp;
+                    <small>
+                      <a href="{% url 'poster_view_comment' slug=poster.slug comment_id=comment.id %}">Link</a>
+                    </small>
+                  </form>
+                </div>
+
+                <div class="pull-right">
+                  <span class="comment-type">ME HAGO CARGO</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>{{ comment.author }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}
