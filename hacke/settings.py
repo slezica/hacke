@@ -12,6 +12,16 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+in_heroku = False
+
+if 'DATABASE_URL' in os.environ:
+    in_heroku = True
+
+import dj_database_url
+
+if in_heroku:
+    DATABASES = {'default': dj_database_url.config()}
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
