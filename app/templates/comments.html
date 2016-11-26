@@ -8,10 +8,14 @@
   <h1>{{ poster.text }}</h1>
 
   {% for comment in comments %}
-    <a href="{% url 'comments_view' slug=poster.slug comment_id=comment.id %}">Single</a>
+    <a href="{% url 'comments_view_single' slug=poster.slug comment_id=comment.id %}">Single</a>
     <p>{{ comment.author }}</p>
     <p>{{ comment.text }}</p>
     <p>{{ comment.votes }}</p>
   {% endfor %}
+
+  <form method="POST" action="{% url 'comments_add' slug=poster.slug %}">
+
+  </form>
 </body>
 </html>

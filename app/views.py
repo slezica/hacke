@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponseBadRequest
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Poster, Comment
 # from .forms import AddCommentForm
@@ -12,7 +13,7 @@ def index(request):
 
 
 def comments_view(request, slug, comment_id=None, page='1'):
-    poster = Poster.objects.get(slug=slug)
+    poster = get_object_or_404(Poster, slug=slug)
 
     start, end = paginate(page)
 
@@ -21,7 +22,7 @@ def comments_view(request, slug, comment_id=None, page='1'):
 
     # If given a specific comment, place it first:
     if comment_id:
-        comments.insert(0, Comment.objects.get(id=comment_id))
+        comments.insert(0, get_object_or_404(Comment, id=comment_id))
 
     return render(request, 'comments.html', {
         'poster'  : poster,
@@ -29,13 +30,16 @@ def comments_view(request, slug, comment_id=None, page='1'):
     })
 
 
-def comments_add(request):
-    pass
-# def add_comment(request):
-#     form = AddCommentForm(request.POST)
+def comments_add(request, slug):
+    poster = get_object_or_404(Poster, slug=slug)
 
-#     if form.is_valid():
-#         return asd
+    form = AddCommentForm(request.POST)
 
-#     else:
-#         return other
+    if form.is_valid():
+        props = form.validated_data
+        comment = Comment.objects.create(**props)
+
+        return redirect('comments_view', slug=poster.slug, comment_id=comment.id)
+
+    else:
+        return HttpResponseBadRequest()
