@@ -7,19 +7,23 @@ from .forms import AddReactionForm, AttachCommentForm
 
 
 def index(request):
-    return render(request, 'index.html', {
-        'posters': Poster.objects.all()
-    })
+    posters = [
+        {
+            'text'     : poster.text,
+            'slug'     : poster.slug,
+            'reactions': poster.reaction_counts()
+        }
+        for poster in Poster.objects.all()
+    ]
+
+    return render(request, 'index.html', { 'posters': posters })
 
 
 def poster_view(request, slug, comment_id=None, page=None):
     poster = get_object_or_404(Poster, slug=slug)
 
     # Fetch total reaction counts:
-    reactions = {
-        'ouch' : Reaction.objects.filter(poster=poster, type=Reaction.Type.OUCH).count(),
-        'sorry': Reaction.objects.filter(poster=poster, type=Reaction.Type.SORRY).count()
-    }
+    reactions = poster.reaction_counts()
 
     # Fetch page of comments:
     start, end = paginate(page)
