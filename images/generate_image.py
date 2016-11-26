@@ -1,19 +1,29 @@
 from PIL import Image, ImageDraw, ImageFont
+import textwrap
 
-def generate_image(text, output_file='out.png'):
-    # til = Image.open("grey-background.jpg")
-    size = (800,400)
-    bgcolor = (127, 219, 182, 1)
-    til = Image.new('RGBA', size, bgcolor)
-    im = Image.open("sherk.png")
-    til.paste(im, (1050,830), im)
+def generate_image(text_lines, output_file='out.png'):
+    # settings
+    size=(1200, 800)
+    bgcolor = (254, 240, 53, 255)
+    badge = Image.open("badge.png")
+    font = ImageFont.truetype("/Library/Fonts/Arial.ttf", 54)
+    margin = offset = 100
+    text_color = (100,130,110)
 
-    draw = ImageDraw.Draw(til)
-    tcolor = (100,130,110)
-    text_pos = (200,500)
-    font = ImageFont.truetype("/Library/Fonts/Arial.ttf", 81)
-    draw.text(text_pos, text, fill=tcolor, font=font)
+    # prepare assets
+    badge.thumbnail(size, Image.ANTIALIAS)
+    new = Image.new('RGBA', size, bgcolor)
 
-    til.save(output_file)
+    # draw text
+    draw = ImageDraw.Draw(new)
 
-generate_image("nisman did nothing wrong")
+    for line in text_lines:
+        draw.text((margin, offset), line, font=font, fill=text_color)
+        offset += font.getsize(line)[1]
+
+    # paste badge
+    new.paste(badge,(0, size[1] - badge.size[1]), badge)
+
+    new.save(output_file)
+
+generate_image(["nisman did nothing wrong", "because he's a great man and ", "husband and lover and prosecutor"])
