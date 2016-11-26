@@ -34,6 +34,18 @@ class Command(BaseCommand):
             text = "Podés dar la clase sola?"
         )
 
+        p5 = Poster.objects.create(
+            text = "Manejás como mujer"
+        )
+
+        p6 = Poster.objects.create(
+            text = "Llorás como nena"
+        )
+
+        p7 = Poster.objects.create(
+            text = "No seas histérica"
+        )
+
         # for _ in range(3):
         #     u = User.objects.create()
         #     Reaction.objects.create(poster=p1, author=u, type=Reaction.Type.OUCH)
