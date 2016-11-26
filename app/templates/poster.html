@@ -17,7 +17,15 @@
 
   <section class="row">
     <div class="col-xs-12 col-md-4">
+
       <div class="well well-lg image-well {% if my_reaction %}with-reaction{% endif %}">
+        <div class="share text-center" style="margin-bottom: 10px">
+          <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{ poster.text }}" data-size="small">Tweet</a>
+          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-mobile-iframe="true">
+            <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a>
+          </div>
+        </div>
+
         <div class="image-container">
           <div class="image text-center">
             <img class="img-responsive" src="/static/img/{{ poster.slug }}.png" alt="Ogro machista" width="500" height="300" title="{{ poster.text }}" />
@@ -45,11 +53,11 @@
                 <input type="hidden" name="poster" value="{{ poster.id }}">
                 <input type="hidden" class="js-hidden-type" name="type" value="">
 
-                <div class="btn btn-raised btn-hurt btn-comment" data-type="ouch">
+                <div class="btn btn-raised btn-hurt btn-comment" style="width: 45%;" data-type="ouch">
                   ME DOLIO
                   <span class="badge">{{ reactions.ouch }}</span>
                 </div>
-                <div class="btn btn-raised btn-deal btn-comment pull-sm-right" data-type="sorry">
+                <div class="btn btn-raised btn-deal btn-comment pull-sm-right" style="width: 45%;" data-type="sorry">
                   ME HAGO CARGO
                   <span class="badge">{{ reactions.sorry }}</span>
                 </div>
@@ -73,15 +81,8 @@
           </form>
         </div>
 
-        <div class="share">
-          <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{ poster.text }}" data-size="small">Tweet</a>
-          <div class="pull-right fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-mobile-iframe="true">
-            <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a>
-          </div>
-        </div>
-
-        <div class="violence">
-          <b><a href="#" id="js-violence-modal">Esto también es violencia</a></b>
+        <div class="violence text-center">
+          <b><a href="#" id="js-violence-modal" style="font-weight: bold; text-decoration: underline">¿Por qué esto es violencia?</a></b>
           <p>
             <a href="http://www.cnm.gov.ar/index.php">Consejo Nacional de las Mujeres</a>, <a href="http://www.inadi.gob.ar/">Inadi</a>, <a href="http://www.defensadelpublico.gob.ar/">Defensoria del Público</a>, <a href="http://www.cnm.gov.ar/linea144.php">Línea Telefónica 144 (contención y asesoramiento)</a>
           </p>
