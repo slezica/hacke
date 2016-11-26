@@ -31,6 +31,19 @@
     <button type="submit">Sorry</button>
   </form>
 
+  {% if my_reaction %}
+    <form method="POST" action="{% url 'attach_comment' %}">
+      {% csrf_token %}
+      <input type="hidden" name="reaction" value="{{ my_reaction.id }}">
+
+      <div>
+        <label>Testimonio|Confesion (dynamic?)</label>
+        <textarea name="text"></textarea>
+      </div>
+
+      <button type="submit">Postealo maestro</button>
+    </form>
+  {% endif %}
 
 </body>
 </html>

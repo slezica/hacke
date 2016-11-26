@@ -34,10 +34,13 @@ def poster_view(request, slug, comment_id=None, page=None):
     if comment_id:
         comments.insert(0, get_object_or_404(Comment, id=comment_id))
 
+    my_reaction = Reaction.objects.filter(poster=poster, author=request.user).first()
+
     return render(request, 'poster.html', {
-        'poster'   : poster,
-        'reactions': reactions,
-        'comments' : comments
+        'poster'     : poster,
+        'reactions'  : reactions,
+        'comments'   : comments,
+        'my_reaction': my_reaction
     })
 
 
@@ -54,5 +57,23 @@ def add_reaction(request):
 
         return redirect('poster_view', slug=data['poster'].slug)
 
+    else:
+        print form.errors
 
-# def attach_comment
+def attach_comment(request):
+    form = AttachCommentForm(request.POST)
+
+    if form.is_valid():
+        data = form.clean()
+        reaction = data['reaction']
+
+        try:
+            reaction.set_comment(data['text'])
+            return redirect('poster_view_comment', slug=reaction.poster.slug, comment_id=reaction.comment.id)
+
+        except Exception as e:
+            print e
+            return redirect('poster_view', slug=reaction.poster.slug)
+
+    else:
+        print form.errors

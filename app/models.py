@@ -53,6 +53,11 @@ class Reaction(Model):
     class Meta:
         unique_together = [('poster', 'author')]
 
+    @transaction.atomic
+    def set_comment(self, text):
+        return Comment.objects.get_or_create(reaction=self, text=text)
+
+
     poster = ForeignKey(Poster, related_name='reactions')
     author = ForeignKey(User, related_name='reactions')
     type   = CharField(max_length=10, choices=Type.CHOICES)
@@ -62,3 +67,4 @@ class Comment(Model):
     reaction = OneToOneField(Reaction, related_name='comment')
     text     = TextField()
     votes    = IntegerField(default=0)
+
